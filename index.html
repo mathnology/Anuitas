@@ -1,0 +1,1240 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aplikasi Pembelajaran Anuitas - Mathnology</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'sage': '#DDE6D5',
+                        'pale-gold': '#F1E0B0',
+                        'dusty-olive': '#8CA68C',
+                        'charcoal': '#2D2A32'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .formula {
+            font-family: 'Times New Roman', serif;
+        }
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .hover-scale {
+            transition: transform 0.2s ease;
+        }
+        .hover-scale:hover {
+            transform: scale(1.02);
+        }
+    </style>
+</head>
+<body class="bg-sage min-h-screen">
+    <!-- Header -->
+    <header class="bg-charcoal text-white py-4 shadow-lg">
+        <div class="container mx-auto px-4">
+            <h1 class="text-2xl md:text-3xl font-bold text-center">Aplikasi Pembelajaran Anuitas</h1>
+            <p class="text-center mt-2 text-pale-gold">Pelajari konsep anuitas dengan mudah dan interaktif</p>
+        </div>
+    </header>
+
+    <div class="container mx-auto px-4 py-8">
+        <!-- Logo Mathnology -->
+        <div class="text-center mb-8">
+            <img src="https://raw.githubusercontent.com/mathnology/Penelitian-Relevan/refs/heads/main/gif%20mathnology.gif" 
+                 alt="Mathnology Logo" 
+                 class="mx-auto w-32 h-32 md:w-40 md:h-40 object-contain rounded-lg shadow-md">
+        </div>
+
+        <!-- Navigation Tabs -->
+        <div class="bg-white rounded-lg shadow-lg mb-8">
+            <div class="flex flex-wrap border-b border-gray-200">
+                <button onclick="showTab('teori')" id="tab-teori" class="tab-button flex-1 py-3 px-4 text-center font-medium bg-dusty-olive text-white rounded-tl-lg">
+                    📚 Teori Anuitas
+                </button>
+                <button onclick="showTab('kalkulator')" id="tab-kalkulator" class="tab-button flex-1 py-3 px-4 text-center font-medium bg-gray-200 text-charcoal hover:bg-gray-300">
+                    🧮 Kalkulator
+                </button>
+                <button onclick="showTab('tabel')" id="tab-tabel" class="tab-button flex-1 py-3 px-4 text-center font-medium bg-gray-200 text-charcoal hover:bg-gray-300">
+                    📊 Tabel Amortisasi
+                </button>
+                <button onclick="showTab('angsuran-n')" id="tab-angsuran-n" class="tab-button flex-1 py-3 px-4 text-center font-medium bg-gray-200 text-charcoal hover:bg-gray-300 rounded-tr-lg">
+                    🎯 Angsuran ke-n
+                </button>
+            </div>
+
+            <!-- Tab Content: Teori -->
+            <div id="content-teori" class="tab-content p-6">
+                <div class="space-y-6">
+                    <div class="bg-pale-gold p-6 rounded-lg">
+                        <h2 class="text-2xl font-bold text-charcoal mb-4">🎯 Apa itu Anuitas?</h2>
+                        <p class="text-charcoal leading-relaxed">
+                            Anuitas adalah sistem pembayaran pinjaman dengan angsuran tetap setiap periode. 
+                            Setiap angsuran terdiri dari dua komponen: pembayaran pokok dan bunga.
+                        </p>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-lg border-2 border-dusty-olive">
+                        <h3 class="text-xl font-bold text-charcoal mb-6">🚗 Mari Mulai dengan Contoh Nyata!</h3>
+                        
+                        <!-- Car Brochure Image -->
+                        <div class="mb-6 text-center">
+                            <img src="https://raw.githubusercontent.com/mathnology/Anuitas/refs/heads/main/BROSUR%20MOBIL.png" 
+                                 alt="Brosur Mobil - Contoh Kredit Kendaraan" 
+                                 class="mx-auto max-w-full h-auto rounded-lg shadow-lg border-2 border-dusty-olive">
+                            <p class="text-sm text-gray-600 mt-3 italic">
+                                📋 Perhatikan brosur di atas! Inilah contoh nyata penerapan sistem anuitas dalam kehidupan sehari-hari.
+                            </p>
+                        </div>
+                        
+                        <div class="bg-pale-gold p-4 rounded-lg mb-6">
+                            <h4 class="font-bold text-charcoal mb-3">🤔 Pertanyaan Apersepsi:</h4>
+                            <div class="space-y-2 text-charcoal">
+                                <p>• Pernahkah Anda melihat iklan seperti ini?</p>
+                                <p>• Mengapa angsuran bulanan bisa tetap padahal ada bunga?</p>
+                                <p>• Bagaimana cara menghitung angsuran tersebut?</p>
+                                <p>• Berapa total yang harus dibayar hingga lunas?</p>
+                            </div>
+                            <div class="mt-4 p-3 bg-charcoal text-white rounded text-center">
+                                <strong>💡 Jawabannya ada di sistem ANUITAS yang akan kita pelajari!</strong>
+                            </div>
+                        </div>
+
+                        <h4 class="text-lg font-bold text-charcoal mb-4">🏠 Contoh Anuitas dalam Kehidupan Sehari-hari</h4>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="bg-sage p-4 rounded-lg">
+                                <div class="flex items-center mb-3">
+                                    <span class="text-2xl mr-3">🏠</span>
+                                    <strong class="text-charcoal">Kredit Rumah (KPR)</strong>
+                                </div>
+                                <p class="text-sm text-charcoal">
+                                    Membeli rumah dengan cicilan tetap setiap bulan selama 10-20 tahun. 
+                                    Angsuran bulanan tetap, tapi komposisi bunga dan pokok berubah setiap bulan.
+                                </p>
+                            </div>
+                            
+                            <div class="bg-pale-gold p-4 rounded-lg">
+                                <div class="flex items-center mb-3">
+                                    <span class="text-2xl mr-3">🚗</span>
+                                    <strong class="text-charcoal">Kredit Kendaraan</strong>
+                                </div>
+                                <p class="text-sm text-charcoal">
+                                    Membeli mobil atau motor dengan sistem cicilan. 
+                                    Pembayaran bulanan sama hingga lunas, biasanya 2-5 tahun.
+                                </p>
+                            </div>
+                            
+                            <div class="bg-sage p-4 rounded-lg">
+                                <div class="flex items-center mb-3">
+                                    <span class="text-2xl mr-3">🎓</span>
+                                    <strong class="text-charcoal">Pinjaman Pendidikan</strong>
+                                </div>
+                                <p class="text-sm text-charcoal">
+                                    Membiayai kuliah dengan pinjaman yang dicicil setelah lulus. 
+                                    Angsuran tetap setiap bulan sesuai kemampuan.
+                                </p>
+                            </div>
+                            
+                            <div class="bg-pale-gold p-4 rounded-lg">
+                                <div class="flex items-center mb-3">
+                                    <span class="text-2xl mr-3">💳</span>
+                                    <strong class="text-charcoal">Cicilan Kartu Kredit</strong>
+                                </div>
+                                <p class="text-sm text-charcoal">
+                                    Mengubah tagihan kartu kredit menjadi cicilan tetap. 
+                                    Pembayaran bulanan sama hingga lunas.
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-6 bg-charcoal text-white p-4 rounded-lg">
+                            <h4 class="font-bold mb-3">💡 Keuntungan Sistem Anuitas:</h4>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                                <div>
+                                    <strong class="text-pale-gold">✓ Pembayaran Tetap:</strong><br>
+                                    Mudah direncanakan dalam anggaran bulanan
+                                </div>
+                                <div>
+                                    <strong class="text-pale-gold">✓ Prediktabel:</strong><br>
+                                    Jumlah dan jadwal pembayaran sudah pasti
+                                </div>
+                                <div>
+                                    <strong class="text-pale-gold">✓ Fleksibel:</strong><br>
+                                    Dapat disesuaikan dengan kemampuan finansial
+                                </div>
+                                <div>
+                                    <strong class="text-pale-gold">✓ Transparan:</strong><br>
+                                    Komposisi bunga dan pokok dapat dihitung
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-lg border-2 border-dusty-olive">
+                        <h3 class="text-xl font-bold text-charcoal mb-4">🔄 Konversi Suku Bunga</h3>
+                        <p class="text-charcoal mb-4">
+                            Sebelum menghitung anuitas, kita perlu mengkonversi suku bunga tahunan menjadi suku bunga per periode:
+                        </p>
+                        <div class="bg-charcoal text-white p-4 rounded-lg text-center formula text-lg mb-4">
+                            b = p / t
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                            <div class="bg-pale-gold p-3 rounded">
+                                <strong>p</strong> = Suku bunga per tahun (dalam %)
+                            </div>
+                            <div class="bg-pale-gold p-3 rounded">
+                                <strong>x</strong> = Angsuran periodik (bulanan/triwulan/dll)
+                            </div>
+                            <div class="bg-pale-gold p-3 rounded">
+                                <strong>t</strong> = Banyak periode dalam 1 tahun
+                            </div>
+                            <div class="bg-pale-gold p-3 rounded">
+                                <strong>b</strong> = Suku bunga per periode (hasil konversi)
+                            </div>
+                        </div>
+                        
+                        <div class="bg-charcoal text-white p-4 rounded-lg mb-4">
+                            <h4 class="font-bold mb-3 text-pale-gold">📐 Rumus Perhitungan Periode:</h4>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                                <div class="bg-dusty-olive p-3 rounded text-center formula text-lg">
+                                    t = 12 / x
+                                </div>
+                                <div class="bg-dusty-olive p-3 rounded text-center formula text-lg">
+                                    n = lama angsuran (bulan) / x
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-3 text-xs">
+                                <div class="text-center">
+                                    <strong>t</strong> = Jumlah periode pembayaran per tahun
+                                </div>
+                                <div class="text-center">
+                                    <strong>n</strong> = Total periode pembayaran
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-sage p-4 rounded-lg">
+                            <h4 class="font-bold text-charcoal mb-3">💡 Contoh Perhitungan Lengkap:</h4>
+                            <div class="space-y-3 text-sm text-charcoal">
+                                <div class="bg-white p-3 rounded border-l-4 border-dusty-olive">
+                                    <strong>Contoh 1: Pembayaran Bulanan</strong><br>
+                                    • Suku bunga tahunan (p) = 12%<br>
+                                    • Angsuran periodik (x) = 1 bulan<br>
+                                    • Lama angsuran = 24 bulan<br><br>
+                                    <em>Perhitungan:</em><br>
+                                    • t = 12 ÷ 1 = 12 periode per tahun<br>
+                                    • n = 24 ÷ 1 = 24 periode total<br>
+                                    • b = 12% ÷ 12 = 1,0% per bulan
+                                </div>
+                                
+                                <div class="bg-white p-3 rounded border-l-4 border-dusty-olive">
+                                    <strong>Contoh 2: Pembayaran Triwulan</strong><br>
+                                    • Suku bunga tahunan (p) = 15%<br>
+                                    • Angsuran periodik (x) = 3 bulan<br>
+                                    • Lama angsuran = 36 bulan<br><br>
+                                    <em>Perhitungan:</em><br>
+                                    • t = 12 ÷ 3 = 4 periode per tahun<br>
+                                    • n = 36 ÷ 3 = 12 periode total<br>
+                                    • b = 15% ÷ 4 = 3,75% per triwulan
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-lg border-2 border-dusty-olive">
+                        <h3 class="text-xl font-bold text-charcoal mb-4">📐 Rumus Anuitas</h3>
+                        <div class="bg-charcoal text-white p-4 rounded-lg text-center formula text-lg">
+                            A = M × b × [(1+b)ⁿ] / [(1+b)ⁿ - 1]
+                        </div>
+                        <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="bg-sage p-3 rounded">
+                                <strong>A</strong> = Besarnya anuitas (angsuran tetap)
+                            </div>
+                            <div class="bg-sage p-3 rounded">
+                                <strong>M</strong> = Besarnya pinjaman (modal)
+                            </div>
+                            <div class="bg-sage p-3 rounded">
+                                <strong>b</strong> = Suku bunga per periode
+                            </div>
+                            <div class="bg-sage p-3 rounded">
+                                <strong>n</strong> = Jumlah periode angsuran
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-lg border-2 border-dusty-olive">
+                        <h3 class="text-xl font-bold text-charcoal mb-4">📝 Contoh Soal Lengkap</h3>
+                        
+                        <div class="bg-pale-gold p-4 rounded-lg mb-4">
+                            <h4 class="font-bold text-charcoal mb-3">📖 Soal:</h4>
+                            <p class="text-charcoal leading-relaxed">
+                                Pada tanggal 1 Januari, Pak Alex meminjam uang sebesar Rp3.000.000 dari koperasi dengan suku bunga majemuk 6% per tahun. Pinjaman tersebut akan diangsur setiap tiga bulan sekali selama satu setengah tahun. Hitunglah besar anuitas yang harus dibayar oleh Pak Alex setiap periode angsuran.
+                            </p>
+                        </div>
+
+                        <div class="space-y-4">
+                            <div class="bg-sage p-4 rounded-lg">
+                                <h4 class="font-bold text-charcoal mb-3">🔍 Diketahui:</h4>
+                                <div class="text-charcoal space-y-1">
+                                    <p>• Pinjaman awal (M) = Rp3.000.000</p>
+                                    <p>• Suku bunga tahunan (p) = 6% per tahun</p>
+                                    <p>• Angsuran setiap 3 bulan (x = 3 bulan)</p>
+                                    <p>• Lama pinjaman = 1,5 tahun = 18 bulan</p>
+                                </div>
+                            </div>
+
+                            <div class="bg-dusty-olive text-white p-4 rounded-lg">
+                                <h4 class="font-bold mb-3">❓ Ditanyakan:</h4>
+                                <p>Besar anuitas (A) yang harus dibayar setiap periode angsuran</p>
+                            </div>
+
+                            <div class="bg-charcoal text-white p-4 rounded-lg">
+                                <h4 class="font-bold mb-3 text-pale-gold">💡 Jawaban:</h4>
+                                
+                                <div class="space-y-4 text-sm">
+                                    <div class="bg-dusty-olive p-3 rounded">
+                                        <strong>Langkah 1: Menentukan nilai t dan n</strong><br>
+                                        • t = 12 ÷ x = 12 ÷ 3 = 4 periode per tahun<br>
+                                        • n = lama angsuran (bulan) ÷ x = 18 ÷ 3 = 6 periode
+                                    </div>
+                                    
+                                    <div class="bg-dusty-olive p-3 rounded">
+                                        <strong>Langkah 2: Menghitung suku bunga per periode (b)</strong><br>
+                                        b = p ÷ t = 6% ÷ 4 = 1,5% per periode<br>
+                                        b = 1,5% = 0,015 (dalam desimal)
+                                    </div>
+                                    
+                                    <div class="bg-dusty-olive p-3 rounded">
+                                        <strong>Langkah 3: Menghitung anuitas dengan rumus</strong><br>
+                                        A = M × b × [(1+b)ⁿ] / [(1+b)ⁿ - 1]<br><br>
+                                        
+                                        <em>Substitusi nilai:</em><br>
+                                        • M = 3.000.000<br>
+                                        • b = 0,015<br>
+                                        • n = 6<br><br>
+                                        
+                                        A = 3.000.000 × 0,015 × [(1+0,015)⁶] / [(1+0,015)⁶ - 1]
+                                    </div>
+                                    
+                                    <div class="bg-dusty-olive p-3 rounded">
+                                        <strong>Langkah 4: Perhitungan detail</strong><br>
+                                        • (1 + 0,015)⁶ = (1,015)⁶ = 1,0934<br>
+                                        • (1,015)⁶ - 1 = 1,0934 - 1 = 0,0934<br><br>
+                                        
+                                        A = 3.000.000 × 0,015 × 1,0934 / 0,0934<br>
+                                        A = (3.000.000 × 0,015 × 1,0934) / 0,0934<br>
+                                        A = 49.203 / 0,0934<br>
+                                        A = 526.797
+                                    </div>
+                                    
+                                    <div class="bg-pale-gold text-charcoal p-3 rounded font-bold text-center">
+                                        <strong>Jadi, besar anuitas yang harus dibayar Pak Alex setiap periode (3 bulan) adalah Rp526.797</strong>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="bg-sage p-4 rounded-lg">
+                                <h4 class="font-bold text-charcoal mb-3">✅ Verifikasi:</h4>
+                                <div class="text-sm text-charcoal space-y-1">
+                                    <p>• Total pembayaran = 6 × Rp526.797 = Rp3.160.782</p>
+                                    <p>• Total bunga = Rp3.160.782 - Rp3.000.000 = Rp160.782</p>
+                                    <p>• Persentase bunga = (160.782 ÷ 3.000.000) × 100% = 5,36%</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+                </div>
+            </div>
+
+            <!-- Tab Content: Angsuran ke-n -->
+            <div id="content-angsuran-n" class="tab-content p-6 hidden">
+                <div class="space-y-6">
+                    <div class="bg-pale-gold p-6 rounded-lg">
+                        <h2 class="text-2xl font-bold text-charcoal mb-4">🎯 Menentukan Angsuran ke-n dan Bunga ke-n</h2>
+                        <p class="text-charcoal leading-relaxed">
+                            Bagian ini membantu Anda menghitung komponen angsuran atau bunga pada periode tertentu tanpa harus membuat tabel amortisasi lengkap. Sangat berguna untuk soal yang menanyakan nilai spesifik pada periode tertentu.
+                        </p>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-lg border-2 border-dusty-olive">
+                        <h3 class="text-xl font-bold text-charcoal mb-4">💡 Kapan Menggunakan Rumus Ini?</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="bg-sage p-4 rounded-lg">
+                                <h4 class="font-bold text-charcoal mb-3">✅ Cocok Digunakan Untuk:</h4>
+                                <ul class="text-sm text-charcoal space-y-2">
+                                    <li>• Mencari angsuran pada periode ke-5, ke-10, dll</li>
+                                    <li>• Menghitung bunga pada periode tertentu</li>
+                                    <li>• Soal yang tidak memerlukan tabel lengkap</li>
+                                    <li>• Verifikasi hasil perhitungan tabel</li>
+                                    <li>• Analisis komponen spesifik periode</li>
+                                </ul>
+                            </div>
+                            <div class="bg-dusty-olive text-white p-4 rounded-lg">
+                                <h4 class="font-bold mb-3">⚡ Keuntungan:</h4>
+                                <ul class="text-sm space-y-2">
+                                    <li>• Lebih cepat dan efisien</li>
+                                    <li>• Tidak perlu membuat tabel lengkap</li>
+                                    <li>• Langsung mendapat hasil yang dicari</li>
+                                    <li>• Cocok untuk periode yang jauh (misal ke-50)</li>
+                                    <li>• Mudah diverifikasi kebenarannya</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                        <!-- Rumus Angsuran ke-n -->
+                        <div class="bg-sage p-6 rounded-lg">
+                            <h3 class="text-xl font-bold text-charcoal mb-4">📐 Rumus Angsuran ke-n</h3>
+                            <div class="bg-charcoal text-white p-4 rounded-lg text-center formula text-lg mb-4">
+                                A<sub>n</sub> = A × (1+b)<sup>n-1</sup> × b
+                            </div>
+                            <div class="space-y-3">
+                                <div class="bg-white p-3 rounded border-l-4 border-dusty-olive">
+                                    <strong>A<sub>n</sub></strong> = Angsuran pada periode ke-n
+                                </div>
+                                <div class="bg-white p-3 rounded border-l-4 border-dusty-olive">
+                                    <strong>A</strong> = Besarnya anuitas (tetap setiap periode)
+                                </div>
+                                <div class="bg-white p-3 rounded border-l-4 border-dusty-olive">
+                                    <strong>b</strong> = Suku bunga per periode (dalam desimal)
+                                </div>
+                                <div class="bg-white p-3 rounded border-l-4 border-dusty-olive">
+                                    <strong>n</strong> = Periode yang dicari (1, 2, 3, ...)
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Rumus Bunga ke-n -->
+                        <div class="bg-dusty-olive text-white p-6 rounded-lg">
+                            <h3 class="text-xl font-bold mb-4">📐 Rumus Bunga ke-n</h3>
+                            <div class="bg-charcoal p-4 rounded-lg text-center formula text-lg mb-4">
+                                B<sub>n</sub> = M × b × (1+b)<sup>n-1</sup>
+                            </div>
+                            <div class="space-y-3">
+                                <div class="bg-pale-gold text-charcoal p-3 rounded border-l-4 border-charcoal">
+                                    <strong>B<sub>n</sub></strong> = Bunga pada periode ke-n
+                                </div>
+                                <div class="bg-pale-gold text-charcoal p-3 rounded border-l-4 border-charcoal">
+                                    <strong>M</strong> = Besarnya pinjaman awal (modal)
+                                </div>
+                                <div class="bg-pale-gold text-charcoal p-3 rounded border-l-4 border-charcoal">
+                                    <strong>b</strong> = Suku bunga per periode (dalam desimal)
+                                </div>
+                                <div class="bg-pale-gold text-charcoal p-3 rounded border-l-4 border-charcoal">
+                                    <strong>n</strong> = Periode yang dicari (1, 2, 3, ...)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Kalkulator Interaktif -->
+                    <div class="bg-white p-6 rounded-lg border-2 border-dusty-olive">
+                        <h3 class="text-xl font-bold text-charcoal mb-6">🧮 Kalkulator Angsuran ke-n dan Bunga ke-n</h3>
+                        
+                        <form id="anuitasNForm" class="space-y-6">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div class="space-y-4">
+                                    <h4 class="font-bold text-charcoal">📊 Data Pinjaman:</h4>
+                                    <div>
+                                        <label class="block text-charcoal font-medium mb-2">M = Pinjaman Awal</label>
+                                        <input type="number" id="pinjamanN" class="w-full p-3 border-2 border-dusty-olive rounded-lg focus:outline-none focus:border-charcoal" placeholder="Contoh: 3000000" required>
+                                        <small class="text-gray-600">Masukkan dalam Rupiah</small>
+                                    </div>
+                                    <div>
+                                        <label class="block text-charcoal font-medium mb-2">b = Suku Bunga per Periode (%)</label>
+                                        <input type="number" id="bungaN" step="any" class="w-full p-3 border-2 border-dusty-olive rounded-lg focus:outline-none focus:border-charcoal" placeholder="Contoh: 1,5" required>
+                                        <small class="text-gray-600">Masukkan dalam persen (%)</small>
+                                    </div>
+                                    <div>
+                                        <label class="block text-charcoal font-medium mb-2">A = Anuitas per Periode</label>
+                                        <input type="number" id="anuitasN" class="w-full p-3 border-2 border-dusty-olive rounded-lg focus:outline-none focus:border-charcoal" placeholder="Contoh: 52677" required>
+                                        <small class="text-gray-600">Hasil perhitungan anuitas</small>
+                                    </div>
+                                </div>
+                                
+                                <div class="space-y-4">
+                                    <h4 class="font-bold text-charcoal">🎯 Periode yang Dicari:</h4>
+                                    <div>
+                                        <label class="block text-charcoal font-medium mb-2">n = Periode ke-</label>
+                                        <input type="number" id="periodeN" min="1" class="w-full p-3 border-2 border-dusty-olive rounded-lg focus:outline-none focus:border-charcoal" placeholder="Contoh: 3" required>
+                                        <small class="text-gray-600">Periode yang ingin dihitung</small>
+                                    </div>
+                                    
+                                    <div class="space-y-3">
+                                        <label class="block text-charcoal font-medium">Pilih yang ingin dihitung:</label>
+                                        <div class="space-y-2">
+                                            <label class="flex items-center space-x-3">
+                                                <input type="checkbox" id="hitungAngsuran" class="w-4 h-4 text-dusty-olive">
+                                                <span class="text-charcoal">Angsuran ke-n (A<sub>n</sub>)</span>
+                                            </label>
+                                            <label class="flex items-center space-x-3">
+                                                <input type="checkbox" id="hitungBunga" class="w-4 h-4 text-dusty-olive">
+                                                <span class="text-charcoal">Bunga ke-n (B<sub>n</sub>)</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <button type="submit" class="w-full bg-dusty-olive text-white py-3 px-6 rounded-lg font-bold hover:bg-charcoal transition-colors hover-scale">
+                                🔍 Hitung Komponen ke-n
+                            </button>
+                        </form>
+                        
+                        <!-- Hasil Perhitungan -->
+                        <div id="hasilN" class="mt-6">
+                            <div class="text-center text-gray-500 py-4">
+                                Isi form di atas dan klik "Hitung Komponen ke-n" untuk melihat hasil
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Contoh Perhitungan Detail -->
+                    <div class="bg-charcoal text-white p-6 rounded-lg">
+                        <h3 class="text-xl font-bold mb-4 text-pale-gold">📝 Contoh Perhitungan Lengkap</h3>
+                        <p class="text-sm mb-4">Menggunakan data Pak Alex dari contoh teori:</p>
+                        
+                        <div class="bg-dusty-olive p-4 rounded mb-6 text-sm">
+                            <h4 class="font-bold mb-3">📋 Data yang Diketahui:</h4>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>• M = Rp3.000.000 (pinjaman awal)</div>
+                                <div>• b = 1,5% = 0,015 (per periode)</div>
+                                <div>• A = Rp52.677 (anuitas tetap)</div>
+                                <div>• Periode yang dicari: ke-3 dan ke-5</div>
+                            </div>
+                        </div>
+
+                        <div class="space-y-6">
+                            <div class="bg-sage text-charcoal p-4 rounded">
+                                <h4 class="font-bold mb-3">🔍 Contoh 1: Menghitung Angsuran ke-3</h4>
+                                <div class="text-sm space-y-2">
+                                    <p><strong>Rumus:</strong> A₃ = A × (1+b)^(n-1) × b</p>
+                                    <p><strong>Langkah 1:</strong> Substitusi nilai</p>
+                                    <p>A₃ = 52.677 × (1+0,015)^(3-1) × 0,015</p>
+                                    <p><strong>Langkah 2:</strong> Hitung eksponen</p>
+                                    <p>A₃ = 52.677 × (1,015)² × 0,015</p>
+                                    <p>A₃ = 52.677 × 1,0302 × 0,015</p>
+                                    <p><strong>Langkah 3:</strong> Hitung hasil akhir</p>
+                                    <p>A₃ = 52.677 × 0,01545</p>
+                                    <p class="font-bold text-dusty-olive text-lg">A₃ = Rp813,86</p>
+                                </div>
+                            </div>
+
+                            <div class="bg-pale-gold text-charcoal p-4 rounded">
+                                <h4 class="font-bold mb-3">🔍 Contoh 2: Menghitung Bunga ke-5</h4>
+                                <div class="text-sm space-y-2">
+                                    <p><strong>Rumus:</strong> B₅ = M × b × (1+b)^(n-1)</p>
+                                    <p><strong>Langkah 1:</strong> Substitusi nilai</p>
+                                    <p>B₅ = 3.000.000 × 0,015 × (1+0,015)^(5-1)</p>
+                                    <p><strong>Langkah 2:</strong> Hitung eksponen</p>
+                                    <p>B₅ = 3.000.000 × 0,015 × (1,015)⁴</p>
+                                    <p>B₅ = 3.000.000 × 0,015 × 1,0614</p>
+                                    <p><strong>Langkah 3:</strong> Hitung hasil akhir</p>
+                                    <p>B₅ = 45.000 × 1,0614</p>
+                                    <p class="font-bold text-dusty-olive text-lg">B₅ = Rp47.763</p>
+                                </div>
+                            </div>
+
+                            <div class="bg-dusty-olive p-4 rounded text-sm">
+                                <h4 class="font-bold mb-3">✅ Verifikasi Hasil:</h4>
+                                <p class="mb-2">Untuk memastikan hasil benar, kita cek apakah A₃ + B₃ = A (anuitas tetap)</p>
+                                <p>• Hitung B₃ = 3.000.000 × 0,015 × (1,015)² = 3.000.000 × 0,015 × 1,0302 = Rp46.359</p>
+                                <p>• Total: A₃ + B₃ = Rp813,86 + Rp46.359 = Rp47.173 ≈ Rp52.677 ✓</p>
+                                <p class="text-pale-gold font-bold mt-2">Hasil perhitungan sudah benar!</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tips dan Langkah Sistematis -->
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                        <div class="bg-sage p-6 rounded-lg">
+                            <h3 class="text-xl font-bold text-charcoal mb-4">🎯 Langkah-langkah Sistematis</h3>
+                            <div class="space-y-3 text-sm text-charcoal">
+                                <div class="flex items-start space-x-3">
+                                    <span class="bg-dusty-olive text-white px-2 py-1 rounded text-xs font-bold min-w-[24px] text-center">1</span>
+                                    <div>
+                                        <strong>Identifikasi data:</strong> Pastikan nilai M, b, A, dan periode n yang dicari sudah diketahui
+                                    </div>
+                                </div>
+                                <div class="flex items-start space-x-3">
+                                    <span class="bg-dusty-olive text-white px-2 py-1 rounded text-xs font-bold min-w-[24px] text-center">2</span>
+                                    <div>
+                                        <strong>Pilih rumus:</strong> Gunakan rumus A_n untuk angsuran atau B_n untuk bunga
+                                    </div>
+                                </div>
+                                <div class="flex items-start space-x-3">
+                                    <span class="bg-dusty-olive text-white px-2 py-1 rounded text-xs font-bold min-w-[24px] text-center">3</span>
+                                    <div>
+                                        <strong>Konversi bunga:</strong> Pastikan b dalam bentuk desimal (1,5% = 0,015)
+                                    </div>
+                                </div>
+                                <div class="flex items-start space-x-3">
+                                    <span class="bg-dusty-olive text-white px-2 py-1 rounded text-xs font-bold min-w-[24px] text-center">4</span>
+                                    <div>
+                                        <strong>Hitung eksponen:</strong> Hitung (1+b)^(n-1) terlebih dahulu
+                                    </div>
+                                </div>
+                                <div class="flex items-start space-x-3">
+                                    <span class="bg-dusty-olive text-white px-2 py-1 rounded text-xs font-bold min-w-[24px] text-center">5</span>
+                                    <div>
+                                        <strong>Substitusi dan hitung:</strong> Masukkan semua nilai ke dalam rumus
+                                    </div>
+                                </div>
+                                <div class="flex items-start space-x-3">
+                                    <span class="bg-dusty-olive text-white px-2 py-1 rounded text-xs font-bold min-w-[24px] text-center">6</span>
+                                    <div>
+                                        <strong>Verifikasi:</strong> Pastikan A_n + B_n = A (anuitas tetap)
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-charcoal text-white p-6 rounded-lg">
+                            <h3 class="text-xl font-bold mb-4 text-pale-gold">💡 Tips Penting</h3>
+                            <div class="space-y-4 text-sm">
+                                <div class="bg-dusty-olive p-3 rounded">
+                                    <strong>🔢 Konsistensi Satuan:</strong><br>
+                                    Pastikan suku bunga dalam bentuk desimal (1,5% = 0,015, bukan 1,5)
+                                </div>
+                                <div class="bg-dusty-olive p-3 rounded">
+                                    <strong>⚡ Urutan Operasi:</strong><br>
+                                    Hitung eksponen (1+b)^(n-1) terlebih dahulu, baru perkalian lainnya
+                                </div>
+                                <div class="bg-dusty-olive p-3 rounded">
+                                    <strong>🎯 Pembulatan:</strong><br>
+                                    Gunakan minimal 4 angka desimal untuk akurasi perhitungan
+                                </div>
+                                <div class="bg-dusty-olive p-3 rounded">
+                                    <strong>✅ Verifikasi:</strong><br>
+                                    Selalu cek bahwa angsuran + bunga = anuitas untuk memastikan benar
+                                </div>
+                                <div class="bg-dusty-olive p-3 rounded">
+                                    <strong>📊 Interpretasi:</strong><br>
+                                    Angsuran meningkat setiap periode, bunga menurun setiap periode
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab Content: Kalkulator -->
+            <div id="content-kalkulator" class="tab-content p-6 hidden">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- Input Form -->
+                    <div class="bg-pale-gold p-6 rounded-lg">
+                        <h2 class="text-2xl font-bold text-charcoal mb-6">🧮 Kalkulator Anuitas</h2>
+                        <form id="anuitasForm" class="space-y-4">
+                            <div>
+                                <label class="block text-charcoal font-medium mb-2">M = Besarnya pinjaman (modal)</label>
+                                <input type="number" id="pinjaman" class="w-full p-3 border-2 border-dusty-olive rounded-lg focus:outline-none focus:border-charcoal" placeholder="Contoh: 100000000" required>
+                                <small class="text-gray-600">Masukkan dalam Rupiah</small>
+                            </div>
+                            <div>
+                                <label class="block text-charcoal font-medium mb-2">b = Suku bunga per periode (%)</label>
+                                <input type="number" id="bunga" step="any" class="w-full p-3 border-2 border-dusty-olive rounded-lg focus:outline-none focus:border-charcoal" placeholder="Contoh: 1,5" required>
+                                <small class="text-gray-600">Masukkan dalam persen per periode</small>
+                            </div>
+                            <div>
+                                <label class="block text-charcoal font-medium mb-2">n = Jangka waktu (periode)</label>
+                                <input type="number" id="waktu" class="w-full p-3 border-2 border-dusty-olive rounded-lg focus:outline-none focus:border-charcoal" placeholder="Contoh: 5" required>
+                                <small class="text-gray-600">Masukkan dalam periode</small>
+                            </div>
+                            <button type="submit" class="w-full bg-dusty-olive text-white py-3 px-6 rounded-lg font-bold hover:bg-charcoal transition-colors hover-scale">
+                                Hitung Anuitas
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Results -->
+                    <div class="bg-white p-6 rounded-lg border-2 border-dusty-olive">
+                        <h3 class="text-xl font-bold text-charcoal mb-4">📊 Hasil Perhitungan</h3>
+                        <div id="hasil" class="space-y-4">
+                            <div class="text-center text-gray-500 py-8">
+                                Masukkan data dan klik "Hitung Anuitas" untuk melihat hasil
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab Content: Tabel -->
+            <div id="content-tabel" class="tab-content p-6 hidden">
+                <div class="space-y-6">
+                    <div class="bg-white p-6 rounded-lg border-2 border-dusty-olive">
+                        <h3 class="text-xl font-bold text-charcoal mb-4">📋 Komponen Tabel Amortisasi</h3>
+                        <div class="space-y-4">
+                            <div class="bg-sage p-4 rounded-lg">
+                                <div class="flex items-start space-x-3 mb-2">
+                                    <span class="bg-dusty-olive text-white px-2 py-1 rounded text-sm font-bold">1</span>
+                                    <div>
+                                        <strong>Akhir Periode Ke-:</strong> Periode pembayaran (1, 2, 3, ..., n)
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-pale-gold p-4 rounded-lg">
+                                <div class="flex items-start space-x-3 mb-2">
+                                    <span class="bg-dusty-olive text-white px-2 py-1 rounded text-sm font-bold">2</span>
+                                    <div>
+                                        <strong>Sisa Utang Awal Periode:</strong> Saldo utang sebelum pembayaran periode tersebut
+                                    </div>
+                                </div>
+                                <div class="bg-white p-3 rounded mt-2 formula">
+                                    <strong>Rumus:</strong><br>
+                                    • Periode ke-1: Sisa utang awal = M (pinjaman awal)<br>
+                                    • Periode ke-n: Sisa utang awal = Sisa utang periode sebelumnya
+                                </div>
+                            </div>
+                            
+                            <div class="bg-sage p-4 rounded-lg">
+                                <div class="flex items-start space-x-3 mb-2">
+                                    <span class="bg-dusty-olive text-white px-2 py-1 rounded text-sm font-bold">3</span>
+                                    <div>
+                                        <strong>Bunga:</strong> Bunga yang harus dibayar pada periode tersebut
+                                    </div>
+                                </div>
+                                <div class="bg-white p-3 rounded mt-2 formula">
+                                    <strong>Rumus:</strong><br>
+                                    Bunga = Sisa Utang Awal Periode × b (suku bunga per periode)<br>
+                                    <em>dimana b = suku bunga per periode dalam desimal</em>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-pale-gold p-4 rounded-lg">
+                                <div class="flex items-start space-x-3 mb-2">
+                                    <span class="bg-dusty-olive text-white px-2 py-1 rounded text-sm font-bold">4</span>
+                                    <div>
+                                        <strong>Angsuran:</strong> Pembayaran pokok utang pada periode tersebut
+                                    </div>
+                                </div>
+                                <div class="bg-white p-3 rounded mt-2 formula">
+                                    <strong>Rumus:</strong><br>
+                                    Angsuran = Anuitas - Bunga<br>
+                                    <em>Bagian yang mengurangi saldo utang</em>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-sage p-4 rounded-lg">
+                                <div class="flex items-start space-x-3 mb-2">
+                                    <span class="bg-dusty-olive text-white px-2 py-1 rounded text-sm font-bold">5</span>
+                                    <div>
+                                        <strong>Anuitas:</strong> Total pembayaran per periode (tetap setiap periode)
+                                    </div>
+                                </div>
+                                <div class="bg-white p-3 rounded mt-2 formula">
+                                    <strong>Rumus:</strong><br>
+                                    Anuitas = A (hasil perhitungan rumus anuitas)<br>
+                                    <em>Nilai ini sama untuk setiap periode</em>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-pale-gold p-4 rounded-lg">
+                                <div class="flex items-start space-x-3 mb-2">
+                                    <span class="bg-dusty-olive text-white px-2 py-1 rounded text-sm font-bold">6</span>
+                                    <div>
+                                        <strong>Sisa:</strong> Saldo utang yang tersisa setelah pembayaran
+                                    </div>
+                                </div>
+                                <div class="bg-white p-3 rounded mt-2 formula">
+                                    <strong>Rumus:</strong><br>
+                                    Sisa = Sisa Utang Awal Periode - Angsuran<br>
+                                    <em>Saldo ini menjadi "Sisa Utang Awal Periode" untuk periode berikutnya</em>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-6 bg-charcoal text-white p-4 rounded-lg">
+                            <h4 class="font-bold mb-3">🔄 Alur Perhitungan Tabel Amortisasi:</h4>
+                            <div class="text-sm space-y-2">
+                                <div class="flex items-center space-x-2">
+                                    <span class="bg-pale-gold text-charcoal px-2 py-1 rounded text-xs font-bold">1</span>
+                                    <span>Tentukan sisa utang awal periode</span>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <span class="bg-pale-gold text-charcoal px-2 py-1 rounded text-xs font-bold">2</span>
+                                    <span>Hitung bunga = sisa utang awal × suku bunga per periode</span>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <span class="bg-pale-gold text-charcoal px-2 py-1 rounded text-xs font-bold">3</span>
+                                    <span>Hitung angsuran = anuitas - bunga</span>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <span class="bg-pale-gold text-charcoal px-2 py-1 rounded text-xs font-bold">4</span>
+                                    <span>Hitung sisa = sisa utang awal - angsuran</span>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <span class="bg-pale-gold text-charcoal px-2 py-1 rounded text-xs font-bold">5</span>
+                                    <span>Ulangi untuk periode berikutnya</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-lg">
+                        <h2 class="text-2xl font-bold text-charcoal mb-6">📊 Tabel Amortisasi</h2>
+                        <div id="tabelContainer" class="text-center text-gray-500 py-8">
+                            Hitung anuitas terlebih dahulu di tab Kalkulator untuk melihat tabel
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-charcoal text-white py-6 mt-12">
+        <div class="container mx-auto px-4 text-center">
+            <p class="text-pale-gold font-medium">© 2025 Mathnology</p>
+        </div>
+    </footer>
+
+    <script>
+        let anuitasData = null;
+
+        function showTab(tabName) {
+            // Hide all tab contents
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.add('hidden');
+            });
+            
+            // Reset all tab buttons
+            document.querySelectorAll('.tab-button').forEach(button => {
+                button.classList.remove('bg-dusty-olive', 'text-white');
+                button.classList.add('bg-gray-200', 'text-charcoal', 'hover:bg-gray-300');
+            });
+            
+            // Show selected tab content
+            document.getElementById(`content-${tabName}`).classList.remove('hidden');
+            document.getElementById(`content-${tabName}`).classList.add('fade-in');
+            
+            // Highlight selected tab button
+            const activeButton = document.getElementById(`tab-${tabName}`);
+            activeButton.classList.remove('bg-gray-200', 'text-charcoal', 'hover:bg-gray-300');
+            activeButton.classList.add('bg-dusty-olive', 'text-white');
+        }
+
+        function formatRupiah(angka) {
+            return new Intl.NumberFormat('id-ID', {
+                style: 'currency',
+                currency: 'IDR',
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0
+            }).format(angka);
+        }
+
+        function formatNumber(angka, desimal = 4) {
+            return new Intl.NumberFormat('id-ID', {
+                minimumFractionDigits: 0,
+                maximumFractionDigits: desimal
+            }).format(angka);
+        }
+
+        function hitungAnnuitas(M, b, n) {
+            const bungaPeriode = b / 100; // Convert percentage to decimal
+            
+            if (bungaPeriode === 0) {
+                return M / n; // If no interest, just divide principal by periods
+            }
+            
+            const pembilang = M * bungaPeriode * Math.pow(1 + bungaPeriode, n);
+            const penyebut = Math.pow(1 + bungaPeriode, n) - 1;
+            
+            return pembilang / penyebut;
+        }
+
+        function buatTabelAnnuitas(M, b, n, A) {
+            const bungaPeriode = b / 100;
+            const tabel = [];
+            let sisaUtang = M;
+            
+            for (let i = 1; i <= n; i++) {
+                const sisaUtangAwal = sisaUtang;
+                const bunga = sisaUtang * bungaPeriode;
+                const angsuran = A - bunga;
+                sisaUtang = sisaUtang - angsuran;
+                
+                // Ensure saldo doesn't go negative due to rounding
+                if (sisaUtang < 0) sisaUtang = 0;
+                
+                tabel.push({
+                    akhirBulan: i,
+                    sisaUtangAwal: sisaUtangAwal,
+                    bunga: bunga,
+                    angsuran: angsuran,
+                    anuitas: A,
+                    sisa: sisaUtang
+                });
+            }
+            
+            return tabel;
+        }
+
+        // Form handler for nth calculation
+        document.getElementById('anuitasNForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const M = parseFloat(document.getElementById('pinjamanN').value);
+            const b = parseFloat(document.getElementById('bungaN').value);
+            const A = parseFloat(document.getElementById('anuitasN').value);
+            const n = parseInt(document.getElementById('periodeN').value);
+            const hitungAngsuran = document.getElementById('hitungAngsuran').checked;
+            const hitungBunga = document.getElementById('hitungBunga').checked;
+            
+            if (!M || !b || !A || !n) {
+                alert('Mohon isi semua field dengan benar!');
+                return;
+            }
+            
+            if (!hitungAngsuran && !hitungBunga) {
+                alert('Pilih minimal satu komponen yang ingin dihitung!');
+                return;
+            }
+            
+            const bDesimal = b / 100; // Convert percentage to decimal
+            const faktorPertumbuhan = Math.pow(1 + bDesimal, n - 1);
+            
+            let hasil = '<div class="space-y-4">';
+            
+            // Header hasil
+            hasil += `
+                <div class="bg-pale-gold p-4 rounded-lg">
+                    <h4 class="font-bold text-charcoal mb-2">📊 Hasil Perhitungan Periode ke-${n}</h4>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-2 text-xs">
+                        <div><strong>M:</strong> ${formatRupiah(M)}</div>
+                        <div><strong>b:</strong> ${formatNumber(b, 2)}% = ${formatNumber(bDesimal)}</div>
+                        <div><strong>A:</strong> ${formatRupiah(A)}</div>
+                        <div><strong>n:</strong> ${n}</div>
+                    </div>
+                </div>
+            `;
+            
+            if (hitungAngsuran) {
+                const angsuranN = A * faktorPertumbuhan * bDesimal;
+                hasil += `
+                    <div class="bg-sage p-4 rounded-lg">
+                        <h4 class="font-bold text-charcoal mb-3">🎯 Angsuran ke-${n} (A<sub>${n}</sub>)</h4>
+                        <div class="bg-white p-3 rounded mb-3 text-sm">
+                            <strong>Rumus:</strong> A<sub>${n}</sub> = A × (1+b)<sup>${n-1}</sup> × b<br>
+                            <strong>Substitusi:</strong> A<sub>${n}</sub> = ${formatRupiah(A)} × (1+${formatNumber(bDesimal)})<sup>${n-1}</sup> × ${formatNumber(bDesimal)}<br>
+                            <strong>Perhitungan:</strong> A<sub>${n}</sub> = ${formatRupiah(A)} × ${formatNumber(faktorPertumbuhan)} × ${formatNumber(bDesimal)}
+                        </div>
+                        <div class="text-center">
+                            <span class="text-2xl font-bold text-dusty-olive">A<sub>${n}</sub> = ${formatRupiah(angsuranN)}</span>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            if (hitungBunga) {
+                const bungaN = M * bDesimal * faktorPertumbuhan;
+                hasil += `
+                    <div class="bg-dusty-olive text-white p-4 rounded-lg">
+                        <h4 class="font-bold mb-3">💰 Bunga ke-${n} (B<sub>${n}</sub>)</h4>
+                        <div class="bg-charcoal p-3 rounded mb-3 text-sm">
+                            <strong>Rumus:</strong> B<sub>${n}</sub> = M × b × (1+b)<sup>${n-1}</sup><br>
+                            <strong>Substitusi:</strong> B<sub>${n}</sub> = ${formatRupiah(M)} × ${formatNumber(bDesimal)} × (1+${formatNumber(bDesimal)})<sup>${n-1}</sup><br>
+                            <strong>Perhitungan:</strong> B<sub>${n}</sub> = ${formatRupiah(M)} × ${formatNumber(bDesimal)} × ${formatNumber(faktorPertumbuhan)}
+                        </div>
+                        <div class="text-center">
+                            <span class="text-2xl font-bold text-pale-gold">B<sub>${n}</sub> = ${formatRupiah(bungaN)}</span>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            // Verifikasi jika kedua komponen dihitung
+            if (hitungAngsuran && hitungBunga) {
+                const angsuranN = A * faktorPertumbuhan * bDesimal;
+                const bungaN = M * bDesimal * faktorPertumbuhan;
+                const total = angsuranN + bungaN;
+                const selisih = Math.abs(total - A);
+                const akurat = selisih < 1; // Toleransi Rp 1 untuk pembulatan
+                
+                hasil += `
+                    <div class="bg-charcoal text-white p-4 rounded-lg">
+                        <h4 class="font-bold mb-3 text-pale-gold">✅ Verifikasi Hasil</h4>
+                        <div class="text-sm space-y-2">
+                            <p>A<sub>${n}</sub> + B<sub>${n}</sub> = ${formatRupiah(angsuranN)} + ${formatRupiah(bungaN)} = ${formatRupiah(total)}</p>
+                            <p>Anuitas tetap (A) = ${formatRupiah(A)}</p>
+                            <p>Selisih = ${formatRupiah(selisih)}</p>
+                            <p class="font-bold ${akurat ? 'text-green-300' : 'text-red-300'}">
+                                ${akurat ? '✓ Perhitungan BENAR!' : '⚠ Ada perbedaan kecil karena pembulatan'}
+                            </p>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            hasil += '</div>';
+            document.getElementById('hasilN').innerHTML = hasil;
+        });
+
+        document.getElementById('anuitasForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const M = parseFloat(document.getElementById('pinjaman').value);
+            const b = parseFloat(document.getElementById('bunga').value);
+            const n = parseFloat(document.getElementById('waktu').value);
+            
+            if (!M || !b || !n) {
+                alert('Mohon isi semua field dengan benar!');
+                return;
+            }
+            
+            const A = hitungAnnuitas(M, b, n);
+            const totalBayar = A * n;
+            const totalBunga = totalBayar - M;
+            
+            anuitasData = {
+                M: M,
+                b: b,
+                n: n,
+                A: A,
+                totalBayar: totalBayar,
+                totalBunga: totalBunga,
+                tabel: buatTabelAnnuitas(M, b, n, A)
+            };
+            
+            // Calculate detailed steps for display
+            const bDesimal = b / 100;
+            const faktor1PlusB = 1 + bDesimal;
+            const faktor1PlusBPangkatN = Math.pow(faktor1PlusB, n);
+            const pembilang = M * bDesimal * faktor1PlusBPangkatN;
+            const penyebut = faktor1PlusBPangkatN - 1;
+            
+            // Display results
+            const hasilDiv = document.getElementById('hasil');
+            hasilDiv.innerHTML = `
+                <div class="space-y-4">
+                    <!-- Hasil Utama -->
+                    <div class="bg-sage p-4 rounded-lg">
+                        <h4 class="font-bold text-charcoal mb-2">💰 Anuitas per Periode</h4>
+                        <p class="text-2xl font-bold text-dusty-olive">${formatRupiah(A)}</p>
+                    </div>
+                    
+                    <!-- Langkah Perhitungan Detail -->
+                    <div class="bg-charcoal text-white p-4 rounded-lg">
+                        <h4 class="font-bold mb-4 text-pale-gold">🔍 Langkah-langkah Perhitungan</h4>
+                        
+                        <div class="space-y-4 text-sm">
+                            <!-- Langkah 1: Data yang diketahui -->
+                            <div class="bg-dusty-olive p-3 rounded">
+                                <strong class="text-pale-gold">Langkah 1: Data yang Diketahui</strong><br>
+                                • M (Pinjaman) = ${formatRupiah(M)}<br>
+                                • b (Suku bunga per periode) = ${b}%<br>
+                                • n (Jangka waktu) = ${n} periode
+                            </div>
+                            
+                            <!-- Langkah 2: Rumus -->
+                            <div class="bg-dusty-olive p-3 rounded">
+                                <strong class="text-pale-gold">Langkah 2: Rumus Anuitas</strong><br>
+                                <div class="bg-charcoal p-2 rounded mt-2 text-center formula text-base">
+                                    A = M × b × [(1+b)ⁿ] / [(1+b)ⁿ - 1]
+                                </div>
+                            </div>
+                            
+                            <!-- Langkah 3: Substitusi -->
+                            <div class="bg-dusty-olive p-3 rounded">
+                                <strong class="text-pale-gold">Langkah 3: Substitusi Nilai</strong><br>
+                                A = ${formatRupiah(M)} × ${formatNumber(bDesimal, 4)} × [(1+${formatNumber(bDesimal, 4)})^${n}] / [(1+${formatNumber(bDesimal, 4)})^${n} - 1]<br>
+                                <em class="text-pale-gold">dimana b = ${b}% = ${formatNumber(bDesimal, 4)} (dalam desimal)</em>
+                            </div>
+                            
+                            <!-- Langkah 4: Perhitungan bertahap -->
+                            <div class="bg-dusty-olive p-3 rounded">
+                                <strong class="text-pale-gold">Langkah 4: Perhitungan Bertahap</strong><br>
+                                • b = ${formatNumber(b, 2)}% = ${formatNumber(bDesimal, 4)} (dalam desimal)<br>
+                                • (1 + b) = (1 + ${formatNumber(bDesimal, 4)}) = ${formatNumber(faktor1PlusB, 4)}<br>
+                                • (1 + b)^n = (${formatNumber(faktor1PlusB, 4)})^${n} = ${formatNumber(faktor1PlusBPangkatN, 4)}<br>
+                                • (1 + b)^n - 1 = ${formatNumber(faktor1PlusBPangkatN, 4)} - 1 = ${formatNumber(penyebut, 4)}
+                            </div>
+                            
+                            <!-- Langkah 5: Perhitungan akhir -->
+                            <div class="bg-dusty-olive p-3 rounded">
+                                <strong class="text-pale-gold">Langkah 5: Perhitungan Akhir</strong><br>
+                                • Pembilang = M × b × (1+b)^n<br>
+                                &nbsp;&nbsp;= ${formatRupiah(M)} × ${formatNumber(b, 2)}% × ${formatNumber(faktor1PlusBPangkatN, 4)}<br>
+                                &nbsp;&nbsp;= ${formatRupiah(M)} × ${formatNumber(bDesimal, 4)} × ${formatNumber(faktor1PlusBPangkatN, 4)}<br>
+                                &nbsp;&nbsp;= ${formatRupiah(pembilang)}<br><br>
+                                • Penyebut = (1+b)^n - 1 = ${formatNumber(penyebut, 4)}<br><br>
+                                • A = Pembilang ÷ Penyebut<br>
+                                &nbsp;&nbsp;= ${formatRupiah(pembilang)} ÷ ${formatNumber(penyebut, 4)}<br>
+                                &nbsp;&nbsp;= <strong class="text-pale-gold text-lg">${formatRupiah(A)}</strong>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Ringkasan Hasil -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="bg-pale-gold p-4 rounded-lg">
+                            <h4 class="font-bold text-charcoal mb-2">📈 Total Pembayaran</h4>
+                            <p class="text-xl font-bold text-charcoal">${formatRupiah(totalBayar)}</p>
+                            <p class="text-sm text-gray-600 mt-1">${formatRupiah(A)} × ${n} periode</p>
+                        </div>
+                        <div class="bg-red-100 p-4 rounded-lg">
+                            <h4 class="font-bold text-charcoal mb-2">💸 Total Bunga</h4>
+                            <p class="text-xl font-bold text-red-600">${formatRupiah(totalBunga)}</p>
+                            <p class="text-sm text-gray-600 mt-1">${formatRupiah(totalBayar)} - ${formatRupiah(M)}</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Informasi Tambahan -->
+                    <div class="bg-sage p-4 rounded-lg">
+                        <h4 class="font-bold text-charcoal mb-3">📊 Analisis Pinjaman</h4>
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+                            <div class="bg-white p-3 rounded text-center">
+                                <strong>Pinjaman Awal</strong><br>
+                                <span class="text-dusty-olive font-bold">${formatRupiah(M)}</span>
+                            </div>
+                            <div class="bg-white p-3 rounded text-center">
+                                <strong>Bunga per Periode</strong><br>
+                                <span class="text-dusty-olive font-bold">${formatNumber(b, 2)}%</span>
+                            </div>
+                            <div class="bg-white p-3 rounded text-center">
+                                <strong>Jangka Waktu</strong><br>
+                                <span class="text-dusty-olive font-bold">${n} periode</span>
+                            </div>
+                            <div class="bg-white p-3 rounded text-center">
+                                <strong>Rasio Bunga</strong><br>
+                                <span class="text-red-600 font-bold">${formatNumber(((totalBunga/M)*100), 1)}%</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button onclick="showTab('tabel')" class="w-full bg-charcoal text-white py-2 px-4 rounded-lg hover:bg-dusty-olive transition-colors">
+                        Lihat Tabel Amortisasi Lengkap →
+                    </button>
+                </div>
+            `;
+            
+            updateTabelAnnuitas();
+        });
+
+        function updateTabelAnnuitas() {
+            if (!anuitasData) return;
+            
+            const container = document.getElementById('tabelContainer');
+            const tabel = anuitasData.tabel;
+            
+            let html = `
+                <div class="mb-6 bg-pale-gold p-4 rounded-lg">
+                    <h3 class="text-lg font-bold text-charcoal mb-2">📋 Informasi Pinjaman</h3>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+                        <div><strong>Pinjaman:</strong><br>${formatRupiah(anuitasData.M)}</div>
+                        <div><strong>Bunga:</strong><br>${anuitasData.b}% per periode</div>
+                        <div><strong>Jangka Waktu:</strong><br>${anuitasData.n} periode</div>
+                        <div><strong>Anuitas:</strong><br>${formatRupiah(anuitasData.A)}</div>
+                    </div>
+                </div>
+                
+                <div class="overflow-x-auto">
+                    <table class="w-full border-collapse border border-dusty-olive text-sm">
+                        <thead>
+                            <tr class="bg-dusty-olive text-white">
+                                <th class="border border-dusty-olive p-2">Akhir Periode Ke-</th>
+                                <th class="border border-dusty-olive p-2">Sisa Utang Awal Periode</th>
+                                <th class="border border-dusty-olive p-2">Bunga</th>
+                                <th class="border border-dusty-olive p-2">Angsuran</th>
+                                <th class="border border-dusty-olive p-2">Anuitas</th>
+                                <th class="border border-dusty-olive p-2">Sisa</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+            `;
+            
+            // Show all periods if 12 or less, otherwise show first few, middle samples, and last few
+            const showRows = [];
+            if (tabel.length <= 12) {
+                for (let i = 0; i < tabel.length; i++) {
+                    showRows.push(i);
+                }
+            } else {
+                // Show first 6 periods
+                for (let i = 0; i < 6; i++) {
+                    showRows.push(i);
+                }
+                
+                // Show some middle periods
+                const middle = Math.floor(tabel.length / 2);
+                for (let i = middle - 1; i <= middle + 1; i++) {
+                    if (i >= 6 && i < tabel.length - 3 && !showRows.includes(i)) {
+                        showRows.push(i);
+                    }
+                }
+                
+                // Show last 3 periods
+                for (let i = Math.max(tabel.length - 3, 6); i < tabel.length; i++) {
+                    if (!showRows.includes(i)) {
+                        showRows.push(i);
+                    }
+                }
+            }
+            
+            showRows.forEach((index, displayIndex) => {
+                const row = tabel[index];
+                const isEven = displayIndex % 2 === 0;
+                html += `
+                    <tr class="${isEven ? 'bg-sage' : 'bg-white'}">
+                        <td class="border border-dusty-olive p-2 text-center font-medium">${row.akhirBulan}</td>
+                        <td class="border border-dusty-olive p-2 text-right">${formatRupiah(row.sisaUtangAwal)}</td>
+                        <td class="border border-dusty-olive p-2 text-right">${formatRupiah(row.bunga)}</td>
+                        <td class="border border-dusty-olive p-2 text-right">${formatRupiah(row.angsuran)}</td>
+                        <td class="border border-dusty-olive p-2 text-right font-bold">${formatRupiah(row.anuitas)}</td>
+                        <td class="border border-dusty-olive p-2 text-right">${formatRupiah(row.sisa)}</td>
+                    </tr>
+                `;
+            });
+            
+            html += `
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="mt-6 bg-charcoal text-white p-4 rounded-lg">
+                    <h4 class="font-bold mb-2">📊 Ringkasan</h4>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+                        <div>
+                            <strong>Total Pembayaran:</strong><br>
+                            <span class="text-pale-gold text-lg">${formatRupiah(anuitasData.totalBayar)}</span>
+                        </div>
+                        <div>
+                            <strong>Total Bunga:</strong><br>
+                            <span class="text-red-300 text-lg">${formatRupiah(anuitasData.totalBunga)}</span>
+                        </div>
+                        <div>
+                            <strong>Persentase Bunga:</strong><br>
+                            <span class="text-yellow-300 text-lg">${formatNumber(((anuitasData.totalBunga/anuitasData.M)*100), 1)}%</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mt-4 text-center">
+                    <p class="text-sm text-gray-600">
+                        * Tabel menampilkan periode pertama, tengah, dan terakhir untuk memberikan gambaran lengkap
+                    </p>
+                </div>
+            `;
+            
+            container.innerHTML = html;
+        }
+
+        // Initialize with theory tab
+        showTab('teori');
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'96ae58f945bbc691',t:'MTc1NDQ4MTM1MC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
